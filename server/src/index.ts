@@ -1,4 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+const router = express.Router();
+
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -9,7 +13,10 @@ import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
+router.use(express.urlencoded({ extended: false }));
 
 app.use(morgan("dev"));
 
